@@ -7,7 +7,7 @@
 .env
 
 # Cursor skills directory
-skills.md
+cursor/
 
 # User-specific files
 *.rsuser
