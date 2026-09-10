@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using LanguageReader.API.Data;
-using LanguageReader.API.Models;
+using LanguageReader.API.Services;
 using System.ComponentModel.DataAnnotations;
 
 namespace LanguageReader.API.Controllers;
@@ -10,16 +8,16 @@ namespace LanguageReader.API.Controllers;
 [Route("api/[controller]")]
 public class SavedWordsController : ControllerBase
 {
-    private readonly AppDbContext _context;
+    private readonly ISavedWordService _savedWordService;
 
-    public SavedWordsController(AppDbContext context)
+    public SavedWordsController(ISavedWordService savedWordService)
     {
-        _context = context;
+        _savedWordService = savedWordService;
     }
 
     // POST /api/savedwords - Save a word to your vocabulary collection
     [HttpPost]
-    public async Task<ActionResult<SavedWord>> SaveWord([FromBody] SaveWordRequest request)
+    public async Task<ActionResult> SaveWord([FromBody] SaveWordRequest request)
     {
         // Validate model (checks Required attributes)
         if (!ModelState.IsValid)
@@ -28,42 +26,28 @@ public class SavedWordsController : ControllerBase
         }
 
         // Validate that the word exists
-        var word = await _context.Words.FindAsync(request.WordId);
-        if (word == null)
+        if (!await _savedWordService.WordExistsAsync(request.WordId))
         {
             return NotFound(new { message = $"Word with ID {request.WordId} not found" });
         }
 
         // Validate that the book exists
-        var book = await _context.Books.FindAsync(request.BookId);
-        if (book == null)
+        if (!await _savedWordService.BookExistsAsync(request.BookId))
         {
             return NotFound(new { message = $"Book with ID {request.BookId} not found" });
         }
 
         // Check for duplicate - prevent saving the same word from the same book twice
-        var existingSavedWord = await _context.SavedWords
-            .FirstOrDefaultAsync(sw => sw.WordId == request.WordId && sw.BookId == request.BookId);
-        
-        if (existingSavedWord != null)
+        if (await _savedWordService.IsDuplicateAsync(request.WordId, request.BookId))
         {
             return Conflict(new 
             { 
-                message = "This word from this book is already in your saved collection",
-                existingSavedWordId = existingSavedWord.Id
+                message = "This word from this book is already in your saved collection"
             });
         }
 
-        // Create the saved word entry
-        var savedWord = new SavedWord
-        {
-            WordId = request.WordId,
-            BookId = request.BookId,
-            DateSaved = DateTime.UtcNow
-        };
-
-        _context.SavedWords.Add(savedWord);
-        await _context.SaveChangesAsync();
+        // Create the saved word entry using the service
+        var savedWord = await _savedWordService.SaveWordAsync(request.WordId, request.BookId);
 
         return CreatedAtAction(nameof(GetSavedWords), new { id = savedWord.Id }, savedWord);
     }
@@ -72,38 +56,20 @@ public class SavedWordsController : ControllerBase
     [HttpGet]
     public async Task<ActionResult> GetSavedWords()
     {
-        var savedWords = await _context.SavedWords
-            .Include(sw => sw.Word)    // Load the Word navigation property
-            .Include(sw => sw.Book)    // Load the Book navigation property
-            .OrderByDescending(sw => sw.DateSaved)  // Most recent first
-            .ToListAsync();
-
-        // Return in the format: word text, definition, book title
-        var result = savedWords.Select(sw => new
-        {
-            id = sw.Id,
-            word = sw.Word!.WordText,
-            definition = sw.Word!.Definition,
-            book = sw.Book!.Title,
-            dateSaved = sw.DateSaved
-        });
-
-        return Ok(result);
+        var savedWords = await _savedWordService.GetAllSavedWordsAsync();
+        return Ok(savedWords);
     }
 
     // DELETE /api/savedwords/{id} - Remove a word from your saved collection
     [HttpDelete("{id}")]
     public async Task<ActionResult> DeleteSavedWord(int id)
     {
-        var savedWord = await _context.SavedWords.FindAsync(id);
+        var deleted = await _savedWordService.DeleteSavedWordAsync(id);
 
-        if (savedWord == null)
+        if (!deleted)
         {
             return NotFound(new { message = $"Saved word with ID {id} not found" });
         }
-
-        _context.SavedWords.Remove(savedWord);
-        await _context.SaveChangesAsync();
 
         return NoContent(); // 204 No Content - standard for successful DELETE
     }

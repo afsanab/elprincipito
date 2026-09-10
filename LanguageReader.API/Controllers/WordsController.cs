@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using LanguageReader.API.Data;
-using LanguageReader.API.Models;
+using LanguageReader.API.Services;
 
 namespace LanguageReader.API.Controllers;
 
@@ -9,19 +7,18 @@ namespace LanguageReader.API.Controllers;
 [Route("api/[controller]")]
 public class WordsController : ControllerBase
 {
-    private readonly AppDbContext _context;
+    private readonly IWordService _wordService;
 
-    public WordsController(AppDbContext context)
+    public WordsController(IWordService wordService)
     {
-        _context = context;
+        _wordService = wordService;
     }
 
     // GET /api/words/{word} - Returns a specific word by its text
     [HttpGet("{word}")]
     public async Task<ActionResult> GetWord(string word)
     {
-        var wordEntry = await _context.Words
-            .FirstOrDefaultAsync(w => w.WordText.ToLower() == word.ToLower());
+        var wordEntry = await _wordService.GetWordByTextAsync(word);
 
         if (wordEntry == null)
         {

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using LanguageReader.API.Data;
+using LanguageReader.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,11 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Register services for dependency injection
+builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddScoped<IWordService, WordService>();
+builder.Services.AddScoped<ISavedWordService, SavedWordService>();
 
 builder.Services.AddSwaggerGen(options =>
 {
