@@ -6,6 +6,7 @@ namespace LanguageReader.API.Controllers;
 [Route("api/[controller]")]
 public class StatusController : ControllerBase
 {
+    // GET /api/status - Returns the status of the API
     [HttpGet]
     public ActionResult<StatusResponse> Get()
     {

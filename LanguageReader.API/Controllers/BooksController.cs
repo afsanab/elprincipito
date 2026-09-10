@@ -15,14 +15,14 @@ public class BooksController : ControllerBase
     {
         _context = context;
     }
-
+    // GET /api/books - Returns all books
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Book>>> GetBooks()
     {
         var books = await _context.Books.ToListAsync();
         return Ok(books);
     }
-
+    // GET /api/books/{id} - Returns a specific book by ID
     [HttpGet("{id}")]
     public async Task<ActionResult<Book>> GetBook(int id)
     {

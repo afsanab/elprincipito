@@ -10,4 +10,6 @@ public class AppDbContext : DbContext
     }
 
     public DbSet<Book> Books => Set<Book>();
+    public DbSet<Word> Words => Set<Word>();
+    public DbSet<SavedWord> SavedWords => Set<SavedWord>();
 }

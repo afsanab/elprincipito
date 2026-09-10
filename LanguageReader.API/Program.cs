@@ -26,6 +26,7 @@ using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     DbSeeder.SeedBooks(context);
+    DbSeeder.SeedWords(context);
 }
 
 if (app.Environment.IsDevelopment())
