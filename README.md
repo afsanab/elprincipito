@@ -94,104 +94,86 @@ dotnet run
 ### Week 1 — Backend Development
 
 #### Day 1 — Project + Architecture
-- [x] Create ASP.NET Core Web API project
-- [x] Set up project structure
-- [x] Configure Swagger/OpenAPI
+- [x] ASP.NET Core Web API project
+- [x] Project structure
+- [x] Swagger/OpenAPI configuration
 - [x] First working endpoint
 
 #### Day 2 — Database
-- [x] Create `Book` model (Id, Title, Author, Language, Text)
-- [x] Create `AppDbContext`
-- [x] Configure SQLite connection
-- [x] Create initial migration
+- [x] `Book` model (Id, Title, Author, Language, Text)
+- [x] `AppDbContext`
+- [x] SQLite connection
+- [x] Initial migration
 
 #### Day 3 — Books Endpoints
-- [x] Implement `GET /api/books`
-- [x] Implement `GET /api/books/{id}`
-- [x] Add 3-5 children's stories to database
-- [x] Handle 200 OK and 404 Not Found responses
+- [x] `GET /api/books`
+- [x] `GET /api/books/{id}`
+- [x] Seed 3-5 children's stories
+- [x] HTTP response handling (200, 404)
 
 #### Day 4 — Word Lookup
-- [x] Create `Word` model (Id, WordText, Definition, Language)
-- [x] Implement `GET /api/words/{word}` endpoint
-- [x] Seed 20-30 vocabulary words from stories
-- [x] Test dictionary functionality
+- [x] `Word` model (Id, WordText, Definition, Language)
+- [x] `GET /api/words/{word}` endpoint
+- [x] Seed 20-30 vocabulary words
+- [x] Dictionary functionality
 
 #### Day 5 — Save Vocabulary 🎉
-- [x] Create `SavedWord` model (Id, WordId, BookId, DateSaved)
-- [x] Set up foreign key relationships
-- [x] Implement `POST /api/savedwords`
-- [x] Implement `GET /api/savedwords`
+- [x] `SavedWord` model (Id, WordId, BookId, DateSaved)
+- [x] Foreign key relationships
+- [x] `POST /api/savedwords`
+- [x] `GET /api/savedwords`
 - **Core product complete** ✅
 
 #### Day 6 — Delete + Validation
-- [x] Implement `DELETE /api/savedwords/{id}`
-- [x] Add model validation (missing book, missing word, duplicates)
-- [ ] Test all endpoints through Swagger
-  - [ ] GET books
-  - [ ] GET single book
-  - [ ] GET word lookup
-  - [ ] POST saved word
-  - [ ] GET saved words
-  - [ ] DELETE saved word
-  - [ ] Invalid requests handled properly
+- [x] `DELETE /api/savedwords/{id}`
+- [x] Model validation (missing book, missing word, duplicates)
+- [x] Error handling for invalid requests
 
 #### Day 7 — Backend Cleanup
-- [x] Extract service layer from controllers
-- [x] Implement dependency injection for services
-- [x] Create `IBookService`, `IWordService`, `ISavedWordService`
-- [ ] Git cleanup and commit history review
+- [x] Service layer extraction
+- [x] Dependency injection
+- [x] `IBookService`, `IWordService`, `ISavedWordService`
 
-### Week 2 — Make it a Portfolio Project
+### Week 2 — Frontend & Polish
 
 #### Day 8 — Basic Frontend
-- [ ] Set up Razor Pages
-- [ ] Create book list page
-- [ ] Implement fetch calls to `/api/books`
-- [ ] Display clickable book titles
+- [ ] Razor Pages setup
+- [ ] Book list page
+- [ ] Book detail/reading page
 
 #### Day 9 — Word Lookup UI
-- [ ] Make words in story clickable
-- [ ] Display word definition modal/popup
-- [ ] Add "Save Word" button
-- [ ] Connect to word lookup API
+- [ ] Clickable words in story text
+- [ ] Word definition display
+- [ ] "Save Word" functionality
 
 #### Day 10 — Vocabulary Page
-- [ ] Create "My Vocabulary" page
-- [ ] Display saved words with definitions
-- [ ] Show which story each word came from
-- [ ] Add delete buttons for saved words
+- [ ] "My Vocabulary" page
+- [ ] Saved words list with definitions
+- [ ] Story source display
+- [ ] Delete word functionality
 
 #### Day 11 — Automated Tests
-- [ ] Set up xUnit test project
-- [ ] Write tests for GET book endpoints
-- [ ] Write tests for saved words functionality
-- [ ] Test edge cases (nonexistent resources, validation)
+- [ ] xUnit test project
+- [ ] Book endpoint tests
+- [ ] Saved words tests
+- [ ] Validation and error handling tests
 
 #### Day 12 — Error Handling + Polish
-- [ ] Implement global exception handling
-- [ ] Verify proper HTTP status codes (200, 201, 400, 404)
-- [ ] End-to-end user flow testing
-- [ ] Fix any obvious bugs
+- [ ] Global exception handling
+- [ ] HTTP status code verification
+- [ ] Bug fixes
 
-#### Day 13 — GitHub + README
-- [ ] Complete README with features and architecture
-- [ ] Document installation instructions
-- [ ] Add screenshots (book list, reading page, word lookup, vocabulary page, Swagger)
-- [ ] Document API endpoints
-- [ ] Add tech stack section
+#### Day 13 — Documentation
+- [ ] Complete README
+- [ ] Screenshots (book list, reading page, word lookup, vocabulary, Swagger)
+- [ ] Installation instructions
 
-#### Day 14 — Final Demo + Resume
-- [ ] Final bug hunt and testing
-- [ ] Clean GitHub repository
-  - [ ] Meaningful commit messages
-  - [ ] .gitignore configured
-  - [ ] No hardcoded credentials
-  - [ ] Clean project structure
-- [ ] Write resume entry
-- [ ] Create "Future Features" list for Version 2+
+#### Day 14 — Final Polish
+- [ ] Bug fixes
+- [ ] Repository cleanup
+- [ ] Final documentation review
 
-## ❌ Explicitly NOT in MVP (Version 2+)
+## NOT in MVP (Version 2+)
 
 These features are saved for future versions:
 - User authentication/login
