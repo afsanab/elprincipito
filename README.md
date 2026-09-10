@@ -209,11 +209,3 @@ Run tests:
 ```bash
 dotnet test
 ```
-
-## 📝 License
-
-[Add your license here]
-
----
-
-*"One sees clearly only with the heart. What is essential is invisible to the eye."* - Antoine de Saint-Exupéry
