@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using LanguageReader.API.Services;
-using System.ComponentModel.DataAnnotations;
+using LanguageReader.API.Models;
 
 namespace LanguageReader.API.Controllers;
 
@@ -73,16 +73,4 @@ public class SavedWordsController : ControllerBase
 
         return NoContent(); // 204 No Content - standard for successful DELETE
     }
-}
-
-// Request model for saving a word
-public class SaveWordRequest
-{
-    [Required(ErrorMessage = "WordId is required")]
-    [Range(1, int.MaxValue, ErrorMessage = "WordId must be a positive number")]
-    public int WordId { get; set; }
-
-    [Required(ErrorMessage = "BookId is required")]
-    [Range(1, int.MaxValue, ErrorMessage = "BookId must be a positive number")]
-    public int BookId { get; set; }
 }
