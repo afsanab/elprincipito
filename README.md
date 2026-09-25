@@ -75,7 +75,7 @@ dotnet run
 - API: `https://localhost:5001`
 - Swagger UI: `https://localhost:5001/swagger`
 
-## 📋 API Endpoints
+## API Endpoints
 
 ### Books
 - `GET /api/books` - Get all available stories
