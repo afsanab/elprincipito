@@ -1,8 +1,8 @@
-# Language Reader 📚
+# Language Reader 
 
 A language-learning reading companion where users can browse short children's stories, look up words, and save unfamiliar vocabulary to a personal list.
 
-## 🎯 About
+## About
 
 Language Reader helps language learners transition from studying vocabulary to reading authentic text by providing:
 - Browse children's stories in your target language
@@ -13,7 +13,7 @@ Language Reader helps language learners transition from studying vocabulary to r
 
 Built with C# and ASP.NET Core following sprint-based Agile development.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 **Backend**
 - ASP.NET Core Web API
@@ -42,7 +42,7 @@ EF Core
 SQLite
 ```
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - .NET 6.0 or higher
@@ -89,7 +89,7 @@ dotnet run
 - `POST /api/savedwords` - Save a word to vocabulary list
 - `DELETE /api/savedwords/{id}` - Remove a saved word
 
-## 📅 Two-Week MVP Roadmap
+## Two-Week MVP Roadmap
 
 ### Week 1 — Backend Development
 
@@ -117,12 +117,12 @@ dotnet run
 - [x] Seed 20-30 vocabulary words
 - [x] Dictionary functionality
 
-#### Day 5 — Save Vocabulary 🎉
+#### Day 5 — Save Vocabulary 
 - [x] `SavedWord` model (Id, WordId, BookId, DateSaved)
 - [x] Foreign key relationships
 - [x] `POST /api/savedwords`
 - [x] `GET /api/savedwords`
-- **Core product complete** ✅
+- **Core product complete** 
 
 #### Day 6 — Delete + Validation
 - [x] `DELETE /api/savedwords/{id}`
@@ -188,7 +188,7 @@ These features are saved for future versions:
 - Cloud deployment
 - External dictionary API integration
 
-## 🎯 Future Features
+## Future Features
 
 Planned enhancements for Version 2+:
 - [ ] User authentication and personal accounts
@@ -203,7 +203,7 @@ Planned enhancements for Version 2+:
 - [ ] PostgreSQL for production
 - [ ] Cloud deployment (Azure/AWS)
 
-## 🧪 Testing
+## Testing
 
 Run tests:
 ```bash
